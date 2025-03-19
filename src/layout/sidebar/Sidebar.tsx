@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 
 import styles from "./sidebar.module.scss";
 import { ISidebarProps } from "./sidebar.props";
-import Logo from "../../assets/clearIcons/cleaning-Q.svg";
+import Logo from "../../assets/logo.png";
 
 export const Sidebar: FC<ISidebarProps> = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -18,7 +18,7 @@ export const Sidebar: FC<ISidebarProps> = () => {
         className={cn(styles.aside, {
           [styles.aside_mobile_open]: openMenu,
         })}>
-        <Link to="/unanyan.am" className={styles.logo}>
+        <Link to="/admin.malltique" className={styles.logo}>
           <img src={Logo} alt="logo" />
         </Link>
 
@@ -30,10 +30,25 @@ export const Sidebar: FC<ISidebarProps> = () => {
                   <i className="icon-home"></i>
                 </NavLink>
               </li>
-
+              <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
+                <NavLink to="/dashboard" className={styles.nav_link} style={active}>
+                  <i className="icon-pie-chart"></i>
+                </NavLink>
+              </li>
+              <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
+                <NavLink to="/order" className={styles.nav_link} style={active}>
+                  <i className="icon-wallet"></i>
+                </NavLink>
+              </li>
               <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
                 <NavLink to="/product" className={styles.nav_link} style={active}>
-                  <i className="icon-fire"></i>
+                  <i className="icon-handbag"></i>
+                </NavLink>
+              </li>
+
+              <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
+                <NavLink to="/report" className={styles.nav_link} style={active}>
+                  <i className="icon-graph"></i>
                 </NavLink>
               </li>
 

@@ -14,14 +14,14 @@ export const Languages: FC<ILanguagesProps> = ({ ...props }) => {
 
   const lgs: { [key: string]: ReactNode } = {
     sp: <Image src={Spain} />,
-    ru: <Image src={Rus} />,
     en: <Image src={Eng} />,
   };
 
-  const handleSelectedLg = (lg: "ru" | "sp" | "en") => {
+  const handleSelectedLg = (lg: "sp" | "en") => {
     setCurrLg(lg);
     setOpenSelectLg((prev) => !prev);
   };
+
   return (
     <div
       className={cn(styles.languages, {
@@ -37,11 +37,6 @@ export const Languages: FC<ILanguagesProps> = ({ ...props }) => {
       {currLg !== "sp" && (
         <ActionIcon onClick={() => handleSelectedLg("sp")}>
           <Image className={styles.lg} src={Spain} />
-        </ActionIcon>
-      )}
-      {currLg !== "ru" && (
-        <ActionIcon onClick={() => handleSelectedLg("ru")}>
-          <Image className={styles.lg} src={Rus} />
         </ActionIcon>
       )}
       {currLg !== "en" && (

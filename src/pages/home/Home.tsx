@@ -5,7 +5,7 @@ import Typical from "react-typical";
 
 import styles from "./home.module.scss";
 import { IHomeProps } from "./home.props";
-import { ReactComponent as Avatar } from "../../assets/cleaning service-amico.svg";
+import { ReactComponent as Avatar } from "../../assets/balloon seller-cuate.svg";
 import { Button, Shapes, Socials } from "../../components";
 
 export const Home: FC<IHomeProps> = () => {
@@ -20,7 +20,7 @@ export const Home: FC<IHomeProps> = () => {
         {/*  We offer: <Typical steps={steps} loop={Infinity} wrapper="span" />*/}
         {/*</span>*/}
         <Socials />
-        <Button onClick={() => navigate("/product")}>Book Online</Button>
+        <Button onClick={() => navigate("/product")}>Sign Up </Button>
       </div>
       <Shapes />
     </motion.section>

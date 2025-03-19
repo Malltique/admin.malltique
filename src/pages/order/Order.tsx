@@ -2,14 +2,14 @@ import { Image, Modal, useMantineTheme } from "@mantine/core";
 import { motion } from "framer-motion";
 import React, { FC, useState } from "react";
 
-import { IProductProps } from "./product.props";
+import {IOrderProps} from "./order.props";
 import { Button, Detail, Input, PageTitle } from "../../components";
 import { PRODUCT_MOCK } from "../../data";
 import { IProduct } from "../../interface";
 
-import styles from "./product.module.scss";
+import styles from "./order.module.scss";
 
-export const Product: FC<IProductProps> = () => {
+export const Order: FC<IOrderProps> = () => {
   const [openModal, setOpenModal] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<IProduct>({ id: 0, price: 0 });
 
@@ -35,7 +35,7 @@ export const Product: FC<IProductProps> = () => {
       </Modal>
       <div className={styles.product_header}>
         <div className={styles.product_name}>
-          <PageTitle>Products</PageTitle>
+          <PageTitle>Orders</PageTitle>
         </div>
         <div className={styles.filter_wrapper}>
           <div className={styles.input_wrapper}>
