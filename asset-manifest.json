@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/admin.malltique/static/css/main.5ec25a06.css",
+    "main.js": "/admin.malltique/static/js/main.4c3c949a.js",
+    "static/media/balloon seller-cuate.svg": "/admin.malltique/static/media/balloon seller-cuate.f2f54714cc1ddc43a3061368808cd0df.svg",
+    "static/media/logo.png": "/admin.malltique/static/media/logo.933c2ca141731f93a142.png",
+    "static/media/empty.svg": "/admin.malltique/static/media/empty.ccce02f392931aaeb0dc9f4a5d23cdaf.svg",
+    "static/media/cleaning-Q.svg": "/admin.malltique/static/media/cleaning-Q.09be17eab589ba1c064d8cb925365c32.svg",
+    "static/media/dots-bg.svg": "/admin.malltique/static/media/dots-bg.aa8289c51cd678b8cd47.svg",
+    "static/media/bucket.svg": "/admin.malltique/static/media/bucket.ee8b46dab6c3c8ff56f99fd4350e715a.svg",
+    "static/media/home.svg": "/admin.malltique/static/media/home.7b18d429f636aa7f672480b813ffc24e.svg",
+    "index.html": "/admin.malltique/index.html",
+    "main.5ec25a06.css.map": "/admin.malltique/static/css/main.5ec25a06.css.map",
+    "main.4c3c949a.js.map": "/admin.malltique/static/js/main.4c3c949a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5ec25a06.css",
+    "static/js/main.4c3c949a.js"
+  ]
+}
