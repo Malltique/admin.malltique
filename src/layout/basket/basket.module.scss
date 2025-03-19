@@ -1,0 +1,105 @@
+@use "../../styles/abstracts" as * ;
+
+.basket_wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+}
+.basket_card_wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.2rem;
+  height: 15rem;
+  overflow: scroll;
+}
+
+.input_wrapper {
+  position: relative;
+  height: 2rem;
+  margin: 0.5rem 0;
+}
+
+.button_wrapper {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0.3rem;
+  font-weight: $fw-semiBold;
+  font-size: $fs-media;
+  color: $cl-container;
+  border-radius: 1rem 0 0 0;
+  background-color: $cl-title;
+  cursor: pointer;
+  z-index: 12;
+  transition: .2s;
+}
+
+.button_wrapper_order {
+  padding: 1rem;
+  background-color: $cl-primary ;
+}
+
+
+.basket_footer {
+  box-shadow: $box-shadow;
+  border-radius: $box-radius;
+  padding: 1rem 1rem 4rem;
+  background-color: $cl-brown;
+  position: absolute;
+  bottom: -19rem;
+  transition: .2s;
+  z-index: 4;
+}
+
+.basket_footer_open {
+  bottom: 0;
+}
+
+.basket_info {
+  font-size: $fs-secondary;
+  color: $cl-title;
+  font-weight: $fw-primary;
+}
+
+.basket_orders {
+  font-size: $fs-primary;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 0.4rem;
+  position: relative;
+  margin-bottom: 1rem;
+  border: 1px solid $cl-brown;
+  border-radius:  $box-radius;
+  background-color: $cl-container;
+  padding-bottom: 2rem;
+}
+
+.basket_price {
+  padding: 0.3rem;
+  font-weight: $fw-semiBold;
+  font-size: $fs-media;
+  color: $cl-container;
+  border-radius: 0 1rem 0 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: $cl-primary;
+  z-index: 12;
+  transition: .2s;
+}
+
+.basket_price_order {
+  bottom: 1rem;
+  left: 1rem;
+  border-radius: 0.5rem;
+}
+
+.close_order {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+}

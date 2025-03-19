@@ -1,0 +1,37 @@
+@use "../../styles/abstracts" as *;
+
+.languages {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.875rem;
+  height: 2rem;
+  width: 1.9rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  transition: .5s;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.languages_open {
+  width: 8rem;
+  justify-content: center;
+}
+
+.languages_title {
+  position: absolute;
+  z-index: 11;
+  padding: 0 0 0.3rem 0.2rem;
+}
+
+.lg {
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.lg:hover {
+  opacity: 1;
+}
