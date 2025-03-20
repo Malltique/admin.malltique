@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/admin.malltique/static/css/main.5ec25a06.css",
-    "main.js": "/admin.malltique/static/js/main.daf26815.js",
+    "main.js": "/admin.malltique/static/js/main.261ecad2.js",
     "static/media/balloon seller-cuate.svg": "/admin.malltique/static/media/balloon seller-cuate.f2f54714cc1ddc43a3061368808cd0df.svg",
     "static/media/logo.png": "/admin.malltique/static/media/logo.933c2ca141731f93a142.png",
     "static/media/empty.svg": "/admin.malltique/static/media/empty.ccce02f392931aaeb0dc9f4a5d23cdaf.svg",
@@ -11,10 +11,10 @@
     "static/media/home.svg": "/admin.malltique/static/media/home.7b18d429f636aa7f672480b813ffc24e.svg",
     "index.html": "/admin.malltique/index.html",
     "main.5ec25a06.css.map": "/admin.malltique/static/css/main.5ec25a06.css.map",
-    "main.daf26815.js.map": "/admin.malltique/static/js/main.daf26815.js.map"
+    "main.261ecad2.js.map": "/admin.malltique/static/js/main.261ecad2.js.map"
   },
   "entrypoints": [
     "static/css/main.5ec25a06.css",
-    "static/js/main.daf26815.js"
+    "static/js/main.261ecad2.js"
   ]
 }
