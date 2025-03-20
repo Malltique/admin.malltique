@@ -24,18 +24,18 @@ export const Layout: FC<ILayoutProps> = ({ children, ...props }) => {
             }
           }}
         />
-        <div className={styles.basket_icon}>
-          <Button
-            onClick={() => {
-              if (setOpenBasket) {
-                setOpenBasket(true);
-              }
-            }}
-            variant="secondary"
-            counter={counter}>
-            <i className="icon-basket" />
-          </Button>
-        </div>
+        {/*<div className={styles.basket_icon}>*/}
+        {/*  <Button*/}
+        {/*    onClick={() => {*/}
+        {/*      if (setOpenBasket) {*/}
+        {/*        setOpenBasket(true);*/}
+        {/*      }*/}
+        {/*    }}*/}
+        {/*    variant="secondary"*/}
+        {/*    counter={counter}>*/}
+        {/*    <i className="icon-basket" />*/}
+        {/*  </Button>*/}
+        {/*</div>*/}
         <div className={styles.container}>{children}</div>
       </main>
     </div>
