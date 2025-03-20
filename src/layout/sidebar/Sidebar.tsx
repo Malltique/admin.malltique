@@ -61,7 +61,7 @@ export const Sidebar: FC<ISidebarProps> = () => {
           </div>
         </nav>
         <div className={styles.nav_footer}>
-          <span className={styles.copyright}>&copy; 2023-2024.</span>
+          {/*<span className={styles.copyright}>&copy; 2023-2024.</span>*/}
         </div>
       </aside>
       <ActionIcon

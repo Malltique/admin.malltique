@@ -1,38 +1,15 @@
-import { Image, Modal, useMantineTheme } from "@mantine/core";
 import { motion } from "framer-motion";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 
 import { IProductProps } from "./product.props";
-import { Button, Detail, Input, PageTitle } from "../../components";
-import { PRODUCT_MOCK } from "../../data";
-import { IProduct } from "../../interface";
+import { Button, Input, PageTitle } from "../../components";
 
 import styles from "./product.module.scss";
 
 export const Product: FC<IProductProps> = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const [currentProduct, setCurrentProduct] = useState<IProduct>({ id: 0, price: 0 });
-
-  const theme = useMantineTheme();
-
-  const handleOpenModalClick = (product: IProduct) => {
-    setCurrentProduct(product);
-    setOpenModal(true);
-  };
-  const handleCloseModalClick = () => setOpenModal(false);
 
   return (
     <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <Modal
-        withCloseButton={false}
-        opened={openModal}
-        onClose={handleCloseModalClick}
-        overlayColor={theme.colorScheme === "dark" ? theme.colors.dark[9] : theme.colors.gray[2]}
-        overlayOpacity={0.55}
-        overlayBlur={3}
-        size="md">
-        <Detail onClose={handleCloseModalClick} product={currentProduct} />
-      </Modal>
       <div className={styles.product_header}>
         <div className={styles.product_name}>
           <PageTitle>Products</PageTitle>

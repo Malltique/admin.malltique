@@ -1,6 +1,6 @@
 import React, { FC, FunctionComponent, useContext } from "react";
 
-import { Basket } from "./basket/Basket";
+import { Login } from "./login/Login";
 import styles from "./layout.module.scss";
 import { ILayoutProps } from "./layout.props";
 import { Sidebar } from "./sidebar/Sidebar";
@@ -8,34 +8,33 @@ import { Button, Languages } from "../components";
 import { IMainContext, MainContext, MainContextProvider } from "../context";
 
 export const Layout: FC<ILayoutProps> = ({ children, ...props }) => {
-  const { openBasket, setOpenBasket, basket } = useContext<IMainContext>(MainContext);
-  const counter = Object.values(basket).reduce((acc, curr) => acc + curr.counter, 0);
+  const { openLogin, setOpenLogin, token } = useContext<IMainContext>(MainContext);
 
   return (
     <div {...props}>
       <Sidebar />
       <main className={styles.main}>
         <Languages />
-        <Basket
-          opened={openBasket ? openBasket : false}
+        <Login
+          opened={openLogin}
           onClose={() => {
-            if (setOpenBasket) {
-              setOpenBasket(false);
+            if (setOpenLogin) {
+              setOpenLogin(false);
             }
           }}
         />
-        {/*<div className={styles.basket_icon}>*/}
-        {/*  <Button*/}
-        {/*    onClick={() => {*/}
-        {/*      if (setOpenBasket) {*/}
-        {/*        setOpenBasket(true);*/}
-        {/*      }*/}
-        {/*    }}*/}
-        {/*    variant="secondary"*/}
-        {/*    counter={counter}>*/}
-        {/*    <i className="icon-basket" />*/}
-        {/*  </Button>*/}
-        {/*</div>*/}
+        <div className={styles.basket_icon}>
+          <Button
+            onClick={() => {
+              if (setOpenLogin) {
+                setOpenLogin(true);
+              }
+            }}
+            variant="secondary"
+            >
+            <i className="icon-login" />
+          </Button>
+        </div>
         <div className={styles.container}>{children}</div>
       </main>
     </div>
@@ -46,7 +45,7 @@ export const withLayout =
   <T extends Record<string, unknown>>(Component: FunctionComponent<T>) =>
   (props: T) =>
     (
-      <MainContextProvider basket={{}}>
+      <MainContextProvider token={null} openLogin={false}>
         <Layout>
           <Component {...props} />
         </Layout>

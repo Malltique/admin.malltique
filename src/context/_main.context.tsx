@@ -3,20 +3,23 @@ import React, { createContext, Dispatch, PropsWithChildren, SetStateAction, useS
 import { IProduct } from "../interface";
 
 export interface IMainContext {
-  basket: { [key: string]: { product: IProduct; counter: number } };
-  setInBasket?: Dispatch<SetStateAction<{ [key: string]: { product: IProduct; counter: number } }>>;
-  openBasket?: boolean;
-  setOpenBasket?: Dispatch<SetStateAction<boolean>>;
+  token: string | null;
+  setToken?: Dispatch<SetStateAction<null | string>>;
+  openLogin: boolean;
+  setOpenLogin?: Dispatch<SetStateAction<boolean>>;
 }
 
 export const MainContext = createContext<IMainContext>({
-  basket: {},
+  token: null,
+  openLogin: false,
 });
 
 export const MainContextProvider = ({ children }: PropsWithChildren<IMainContext>): JSX.Element => {
-  const [basket, setInBasket] = useState<{}>({});
-  const [openBasket, setOpenBasket] = useState(false);
+  const [token, setToken] = useState<string | null>(null);
+  const [openLogin, setOpenLogin] = useState(false);
+
+
   return (
-    <MainContext.Provider value={{ openBasket, setOpenBasket, basket, setInBasket }}>{children}</MainContext.Provider>
+    <MainContext.Provider value={{ openLogin, setOpenLogin, token, setToken }}>{children}</MainContext.Provider>
   );
 };
