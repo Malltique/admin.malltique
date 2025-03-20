@@ -14,7 +14,6 @@ export const Layout: FC<ILayoutProps> = ({ children, ...props }) => {
     <div {...props}>
       <Sidebar />
       <main className={styles.main}>
-        <Languages />
         <Login
           opened={openLogin}
           onClose={() => {
@@ -23,7 +22,8 @@ export const Layout: FC<ILayoutProps> = ({ children, ...props }) => {
             }
           }}
         />
-        <div className={styles.basket_icon}>
+        <Languages />
+        <div className={styles.login_icon}>
           <Button
             onClick={() => {
               if (setOpenLogin) {

@@ -53,6 +53,12 @@ export const Sidebar: FC<ISidebarProps> = () => {
               </li>
 
               <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
+                <NavLink to="/settings" className={styles.nav_link} style={active}>
+                  <i className="icon-settings"></i>
+                </NavLink>
+              </li>
+
+              <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
                 <NavLink to="/contact" className={styles.nav_link} style={active}>
                   <i className="icon-envelope"></i>
                 </NavLink>
@@ -60,9 +66,7 @@ export const Sidebar: FC<ISidebarProps> = () => {
             </ul>
           </div>
         </nav>
-        <div className={styles.nav_footer}>
-          {/*<span className={styles.copyright}>&copy; 2023-2024.</span>*/}
-        </div>
+        <div className={styles.nav_footer}></div>
       </aside>
       <ActionIcon
         className={cn(styles.nav_toggle, {

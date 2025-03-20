@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Typical from "react-typical";
 
@@ -7,9 +7,11 @@ import styles from "./home.module.scss";
 import { IHomeProps } from "./home.props";
 import { ReactComponent as Avatar } from "../../assets/balloon seller-cuate.svg";
 import { Button, Shapes, Socials } from "../../components";
+import { IMainContext, MainContext } from "../../context";
 
 export const Home: FC<IHomeProps> = () => {
   const navigate = useNavigate();
+  const { setOpenLogin } = useContext<IMainContext>(MainContext);
   const steps = ["Deep Cleaning 🧹", 3000, "Move-In/Move-Out 🧽", 3000, "Apartment Cleaning 🏠", 3000];
   return (
     <motion.section className={styles.home} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -20,7 +22,11 @@ export const Home: FC<IHomeProps> = () => {
         {/*  We offer: <Typical steps={steps} loop={Infinity} wrapper="span" />*/}
         {/*</span>*/}
         <Socials />
-        <Button onClick={() => navigate("/product")}>Sign Up </Button>
+        <Button onClick={() => {
+          if (setOpenLogin) {
+            setOpenLogin(true)
+          }
+        }}>Sign in</Button>
       </div>
       <Shapes />
     </motion.section>
