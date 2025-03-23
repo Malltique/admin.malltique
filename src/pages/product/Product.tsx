@@ -101,7 +101,7 @@ export const Product: FC<IProductProps> = () => {
           </Card>
         ))}
       </div>
-      <Modal opened={modalOpened} onClose={() => setModalOpened(false)} title="Редактировать продукт">
+      <Modal opened={modalOpened} onClose={() => setModalOpened(false)} title="Edit Product">
         {editProduct && (
           <form>
             <TextInput label="Title" defaultValue={editProduct.title} required mb="sm" />
