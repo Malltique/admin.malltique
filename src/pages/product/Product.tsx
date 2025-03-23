@@ -26,7 +26,7 @@ const tags = ['New', 'Popular', 'Trending', 'Discount'];
 const products = [
   {
     id: 1,
-    images: ['https://via.placeholder.com/150'],
+    images: ['https://michaelkors.scene7.com/is/image/MichaelKors/49T0MAFS3D-3260_1?$large$'],
     title: 'Product Name',
     category: 'Category 1',
     tags: ['New', 'Popular'],
@@ -35,7 +35,7 @@ const products = [
   },
   {
     id: 2,
-    images: ['https://via.placeholder.com/150'],
+    images: ['https://michaelkors.scene7.com/is/image/MichaelKors/49T0MAFS3D-3260_1?$large$'],
     title: 'Another Product',
     category: 'Category 2',
     tags: ['Trending'],
