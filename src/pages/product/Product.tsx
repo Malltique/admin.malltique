@@ -1,12 +1,75 @@
 import { motion } from "framer-motion";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 import { IProductProps } from "./product.props";
 import { Button, Input, PageTitle } from "../../components";
 
 import styles from "./product.module.scss";
+import {
+  Card,
+  Image,
+  Text,
+  Badge,
+  Group,
+  Rating,
+  ActionIcon,
+  Modal,
+  TextInput,
+  Select,
+  MultiSelect, FileInput, Textarea
+} from "@mantine/core";
+import { IconEdit, IconTrash } from '@tabler/icons-react';
+
+const products = [
+  {
+    id: 1,
+    image: 'https://michaelkors.scene7.com/is/image/MichaelKors/49T0MAFS3D-3535_1?$large$',
+    title: 'Название продукта',
+    category: 'Категория',
+    tags: ['Новинка', 'Популярное'],
+    rating: 4.5,
+    description: 'Краткое описание продукта. Очень полезная и интересная вещь.',
+  },
+  {
+    id: 1,
+    image: 'https://michaelkors.scene7.com/is/image/MichaelKors/49T0MAFS3D-3535_1?$large$',
+    title: 'Название продукта',
+    category: 'Категория',
+    tags: ['Новинка', 'Популярное'],
+    rating: 4.5,
+    description: 'Краткое описание продукта. Очень полезная и интересная вещь.',
+  },
+  {
+    id: 1,
+    image: 'https://michaelkors.scene7.com/is/image/MichaelKors/49T0MAFS3D-3535_1?$large$',
+    title: 'Название продукта',
+    category: 'Категория',
+    tags: ['Новинка', 'Популярное'],
+    rating: 4.5,
+    description: 'Краткое описание продукта. Очень полезная и интересная вещь.',
+  },
+  {
+    id: 2,
+    image: 'https://michaelkors.scene7.com/is/image/MichaelKors/49T0MAFS3D-3535_1?$large$',
+    title: 'Другой продукт',
+    category: 'Гаджеты',
+    tags: ['Тренд'],
+    rating: 4.0,
+    description: 'Описание второго продукта. Отличный выбор для покупателя.',
+  },
+];
+
+const categories = ['Категория 1', 'Категория 2', 'Категория 3'];
+const tags = ['Новинка', 'Популярное', 'Тренд', 'Скидка'];
 
 export const Product: FC<IProductProps> = () => {
+  const [editProduct, setEditProduct] = useState<any>(null);
+  const [modalOpened, setModalOpened] = useState(false);
+
+  const openEditModal = (product: any) => {
+    setEditProduct(product);
+    setModalOpened(true);
+  };
 
   return (
     <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -26,21 +89,48 @@ export const Product: FC<IProductProps> = () => {
           </Button>
         </div>
       </div>
-      <div className={styles.product_grid}>
-        {/*{PRODUCT_MOCK.map((product) => (*/}
-        {/*  <div className={styles.product_card} key={product.id}>*/}
-        {/*    <div className={styles.product_thumbnail}>*/}
-        {/*      <Image src={product?.images?.main} alt="" className={styles.product_img} />*/}
-        {/*      <div className={styles.product_mask}></div>*/}
-        {/*    </div>*/}
-        {/*    <span className={styles.product_category}>{product.category}</span>*/}
-        {/*    <h3 className={styles.product_title}>{product.title}</h3>*/}
-        {/*    <a onClick={() => handleOpenModalClick(product)} className={styles.product_button}>*/}
-        {/*      <i className="icon-list" />*/}
-        {/*    </a>*/}
-        {/*  </div>*/}
-        {/*))}*/}
+      <div >
+        {products.map((product) => (
+          <Card key={product.id} shadow="sm" radius="md" withBorder mb="md">
+            <Group align="flex-start" noWrap>
+              <Image src={product.image} width={100} height={100} radius="md" />
+              <div style={{ flex: 1 }}>
+                <Group position="apart">
+                  <Text fw={500} size="lg">{product.title}</Text>
+                  <Group>
+                    <ActionIcon variant="subtle" color="blue">
+                      <IconEdit size={18} onClick={() => openEditModal(product)}/>
+                    </ActionIcon>
+                    <ActionIcon variant="subtle" color="red">
+                      <IconTrash size={18} />
+                    </ActionIcon>
+                  </Group>
+                </Group>
+                <Text size="sm" c="dimmed">{product.category}</Text>
+                <Group mt="xs">
+                  {product.tags.map((tag) => (
+                    <Badge key={tag} color="blue" variant="light">{tag}</Badge>
+                  ))}
+                </Group>
+                <Rating value={product.rating} readOnly mt="xs" />
+                <Text size="sm" mt="xs" c="dimmed">{product.description}</Text>
+              </div>
+            </Group>
+          </Card>
+        ))}
       </div>
+      <Modal opened={modalOpened} onClose={() => setModalOpened(false)} title="Редактировать продукт">
+        {editProduct && (
+          <form>
+            <TextInput label="Название" defaultValue={editProduct.title} required mb="sm" />
+            <Select label="Категория" data={categories} defaultValue={editProduct.category} required mb="sm" />
+            <MultiSelect label="Теги" data={tags} defaultValue={editProduct.tags} mb="sm" />
+            <FileInput label="Загрузить изображения (до 6 штук)" multiple accept="image/*" mb="sm" />
+            <Textarea label="Описание" defaultValue={editProduct.description} required mb="sm" />
+            <Button type="submit">Сохранить</Button>
+          </form>
+        )}
+      </Modal>
     </motion.section>
   );
 };

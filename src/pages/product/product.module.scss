@@ -2,7 +2,6 @@
 
 .product_grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
 
@@ -34,113 +33,6 @@
   column-gap: 0.875rem;
 }
 
-.product_card {
-  position: relative;
-  overflow: hidden;
-  border-radius: $box-radius;
-  box-shadow: $box-shadow;
-  border: 1px solid $cl-brown;
-}
-
-.product_img {
-  height: 10rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.product_mask {
-  background: $cl-fio;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  transition: 0.3s;
-  opacity: 0;
-}
-
-.product_category {
-  color: white;
-  background-color: $cl-primary;
-  border-bottom-left-radius: 0.98rem;
-  border-bottom-right-radius: 0.98rem;
-  position: absolute;
-  top: 0;
-  left: 1.5rem;
-  font-size: $fs-secondary;
-  display: inline-block;
-  padding: 0.19rem 0.625rem;
-}
-
-.product_title {
-  color: white;
-  font-size:  $fs-primary;;
-  margin-left: 0.98rem;
-  padding: 0 1.25rem;
-  position: absolute;
-  text-align: center;
-  top: 3.75rem;
-  transform: translateY(30px);
-  transition: 0.3s;
-  opacity: 0;
-}
-
-.product_button {
-  color: white;
-  position: absolute;
-  bottom: 1.5rem;
-  left: 1.5rem;
-  font-size: $fs-h3;
-  display: block;
-  background-color: $cl-secondary;
-  height: 40px;
-  width: 40px;
-  cursor: pointer;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 42px;
-  transition: 0.3s;
-  opacity: 0;
-}
-
-.product_card:hover .product_button {
-  opacity: 1;
-}
-
-.product_card:hover .product_mask {
-  opacity: 0.9;
-}
-
-.product_card:hover .product_title {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.pagination {
-  position: fixed;
-  width: 100%;
-  background-color: $cl-body;
-  bottom: 0;
-  padding: 0 1rem;
-}
-.product_name {
-}
-
-@media screen and (max-width: 1024px) {
-  .product_grid {
-    grid-template-columns: repeat(3, 1fr);
-    justify-content: center;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .product_grid {
-    grid-template-columns: repeat(2, 1fr);
-    justify-content: center;
-  }
-}
 
 @media screen and (max-width: 530px) {
   .product_grid {
