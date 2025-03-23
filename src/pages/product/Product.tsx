@@ -20,47 +20,29 @@ import {
 } from "@mantine/core";
 import { IconEdit, IconTrash } from '@tabler/icons-react';
 
+const categories = ['Category 1', 'Category 2', 'Category 3'];
+const tags = ['New', 'Popular', 'Trending', 'Discount'];
+
 const products = [
   {
     id: 1,
-    image: 'https://michaelkors.scene7.com/is/image/MichaelKors/49T0MAFS3D-3535_1?$large$',
-    title: 'Название продукта',
-    category: 'Категория',
-    tags: ['Новинка', 'Популярное'],
+    images: ['https://via.placeholder.com/150'],
+    title: 'Product Name',
+    category: 'Category 1',
+    tags: ['New', 'Popular'],
     rating: 4.5,
-    description: 'Краткое описание продукта. Очень полезная и интересная вещь.',
-  },
-  {
-    id: 1,
-    image: 'https://michaelkors.scene7.com/is/image/MichaelKors/49T0MAFS3D-3535_1?$large$',
-    title: 'Название продукта',
-    category: 'Категория',
-    tags: ['Новинка', 'Популярное'],
-    rating: 4.5,
-    description: 'Краткое описание продукта. Очень полезная и интересная вещь.',
-  },
-  {
-    id: 1,
-    image: 'https://michaelkors.scene7.com/is/image/MichaelKors/49T0MAFS3D-3535_1?$large$',
-    title: 'Название продукта',
-    category: 'Категория',
-    tags: ['Новинка', 'Популярное'],
-    rating: 4.5,
-    description: 'Краткое описание продукта. Очень полезная и интересная вещь.',
+    description: 'A brief description of the product. Very useful and interesting item.',
   },
   {
     id: 2,
-    image: 'https://michaelkors.scene7.com/is/image/MichaelKors/49T0MAFS3D-3535_1?$large$',
-    title: 'Другой продукт',
-    category: 'Гаджеты',
-    tags: ['Тренд'],
+    images: ['https://via.placeholder.com/150'],
+    title: 'Another Product',
+    category: 'Category 2',
+    tags: ['Trending'],
     rating: 4.0,
-    description: 'Описание второго продукта. Отличный выбор для покупателя.',
+    description: 'Description of the second product. A great choice for buyers.',
   },
 ];
-
-const categories = ['Категория 1', 'Категория 2', 'Категория 3'];
-const tags = ['Новинка', 'Популярное', 'Тренд', 'Скидка'];
 
 export const Product: FC<IProductProps> = () => {
   const [editProduct, setEditProduct] = useState<any>(null);
@@ -93,7 +75,7 @@ export const Product: FC<IProductProps> = () => {
         {products.map((product) => (
           <Card key={product.id} shadow="sm" radius="md" withBorder mb="md">
             <Group align="flex-start" noWrap>
-              <Image src={product.image} width={100} height={100} radius="md" />
+              <Image src={product.images[0]} width={100} height={100} radius="md" />
               <div style={{ flex: 1 }}>
                 <Group position="apart">
                   <Text fw={500} size="lg">{product.title}</Text>
@@ -122,12 +104,12 @@ export const Product: FC<IProductProps> = () => {
       <Modal opened={modalOpened} onClose={() => setModalOpened(false)} title="Редактировать продукт">
         {editProduct && (
           <form>
-            <TextInput label="Название" defaultValue={editProduct.title} required mb="sm" />
-            <Select label="Категория" data={categories} defaultValue={editProduct.category} required mb="sm" />
-            <MultiSelect label="Теги" data={tags} defaultValue={editProduct.tags} mb="sm" />
-            <FileInput label="Загрузить изображения (до 6 штук)" multiple accept="image/*" mb="sm" />
-            <Textarea label="Описание" defaultValue={editProduct.description} required mb="sm" />
-            <Button type="submit">Сохранить</Button>
+            <TextInput label="Title" defaultValue={editProduct.title} required mb="sm" />
+            <Select label="Category" data={categories} defaultValue={editProduct.category} required mb="sm" />
+            <MultiSelect label="Tags" data={tags} defaultValue={editProduct.tags} mb="sm" />
+            <FileInput label="Upload Images (up to 6)" multiple accept="image/*" mb="sm" />
+            <Textarea label="Description" defaultValue={editProduct.description} required mb="sm" />
+            <Button type="submit">Save</Button>
           </form>
         )}
       </Modal>
