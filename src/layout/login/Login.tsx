@@ -5,6 +5,7 @@ import { ILoginProps } from "./login.props";
 import { Button, Input } from "../../components";
 import { IMainContext, MainContext } from "../../context";
 import styles from './login.module.scss';
+import { Auth } from "../../pages";
 
 interface FormData {
   email: string;
@@ -39,27 +40,7 @@ export const Login: FC<ILoginProps> = ({ onClose, ...props }) => {
       overlayBlur={3}
       padding={15}
       {...props}>
-      <form onSubmit={handleSubmit} action="" className={styles.form}>
-        <div className={styles.form_group}>
-          <div className={styles.input_wrapper}>
-            <Input type="email"
-                   name="email"
-                   placeholder="Email"
-                   value={formData.email}
-                   onChange={handleChange}
-            />
-          </div>
-          <div className={styles.input_wrapper}>
-            <Input type="password"
-                   name="password"
-                   placeholder="Password"
-                   value={formData.password}
-                   onChange={handleChange}
-            />
-          </div>
-        </div>
-        <Button type="submit">Sign in</Button>
-      </form>
+      <Auth/>
     </Drawer>
 );
 };

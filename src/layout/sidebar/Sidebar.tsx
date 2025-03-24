@@ -53,8 +53,8 @@ export const Sidebar: FC<ISidebarProps> = () => {
               </li>
 
               <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
-                <NavLink to="/settings" className={styles.nav_link} style={active}>
-                  <i className="icon-settings"></i>
+                <NavLink to="/profile" className={styles.nav_link} style={active}>
+                  <i className="icon-user"></i>
                 </NavLink>
               </li>
 

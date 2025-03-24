@@ -6,30 +6,20 @@ import { ILayoutProps } from "./layout.props";
 import { Sidebar } from "./sidebar/Sidebar";
 import { Button, Languages } from "../components";
 import { IMainContext, MainContext, MainContextProvider } from "../context";
+import { useNavigate } from "react-router-dom";
 
 export const Layout: FC<ILayoutProps> = ({ children, ...props }) => {
+  const navigate = useNavigate();
   const { openLogin, setOpenLogin, token } = useContext<IMainContext>(MainContext);
 
   return (
     <div {...props}>
       <Sidebar />
       <main className={styles.main}>
-        <Login
-          opened={openLogin}
-          onClose={() => {
-            if (setOpenLogin) {
-              setOpenLogin(false);
-            }
-          }}
-        />
         <Languages />
         <div className={styles.login_icon}>
           <Button
-            onClick={() => {
-              if (setOpenLogin) {
-                setOpenLogin(true);
-              }
-            }}
+            onClick={() => navigate('/auth')}
             variant="secondary"
             >
             <i className="icon-login" />
