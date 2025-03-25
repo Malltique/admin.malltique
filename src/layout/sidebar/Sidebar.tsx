@@ -12,6 +12,9 @@ export const Sidebar: FC<ISidebarProps> = () => {
   const active = ({ isActive }: { isActive: boolean }) => ({
     color: isActive ? "hsl(43, 100%, 68%)" : "hsl(244, 24%, 26%)",
   });
+
+  const token = localStorage.getItem("token");
+
   return (
     <>
       <aside
@@ -25,39 +28,37 @@ export const Sidebar: FC<ISidebarProps> = () => {
         <nav className={styles.nav}>
           <div className={styles.nav_menu}>
             <ul className={styles.nav_list}>
-              <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
-                <NavLink to="/admin.malltique" className={styles.nav_link} style={active}>
-                  <i className="icon-home"></i>
-                </NavLink>
-              </li>
-              <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
-                <NavLink to="/dashboard" className={styles.nav_link} style={active}>
-                  <i className="icon-pie-chart"></i>
-                </NavLink>
-              </li>
-              <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
-                <NavLink to="/order" className={styles.nav_link} style={active}>
-                  <i className="icon-wallet"></i>
-                </NavLink>
-              </li>
-              <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
-                <NavLink to="/product" className={styles.nav_link} style={active}>
-                  <i className="icon-handbag"></i>
-                </NavLink>
-              </li>
-
-              <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
-                <NavLink to="/report" className={styles.nav_link} style={active}>
-                  <i className="icon-graph"></i>
-                </NavLink>
-              </li>
-
-              <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
-                <NavLink to="/profile" className={styles.nav_link} style={active}>
-                  <i className="icon-user"></i>
-                </NavLink>
-              </li>
-
+              {!token && (
+                <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
+                  <NavLink to="/admin.malltique" className={styles.nav_link} style={active}>
+                    <i className="icon-home"></i>
+                  </NavLink>
+                </li>
+              )}
+              {token && (
+                <>
+                  <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
+                    <NavLink to="/dashboard" className={styles.nav_link} style={active}>
+                      <i className="icon-pie-chart"></i>
+                    </NavLink>
+                  </li>
+                  <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
+                    <NavLink to="/order" className={styles.nav_link} style={active}>
+                      <i className="icon-wallet"></i>
+                    </NavLink>
+                  </li>
+                  <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
+                    <NavLink to="/product" className={styles.nav_link} style={active}>
+                      <i className="icon-handbag"></i>
+                    </NavLink>
+                  </li>
+                  <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
+                    <NavLink to="/profile" className={styles.nav_link} style={active}>
+                      <i className="icon-user"></i>
+                    </NavLink>
+                  </li>
+                </>
+              )}
               <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
                 <NavLink to="/contact" className={styles.nav_link} style={active}>
                   <i className="icon-envelope"></i>
@@ -75,6 +76,7 @@ export const Sidebar: FC<ISidebarProps> = () => {
         onClick={() => setOpenMenu((prev) => !prev)}>
         <i className={openMenu ? "icon-close" : "icon-menu"} />
       </ActionIcon>
+      ;
     </>
   );
 };

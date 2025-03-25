@@ -1,16 +1,21 @@
 import { motion } from "framer-motion";
 import React, { FC, useState } from "react";
 
-import {IProfileProps} from "./profile.props";
+import { IProfileProps } from "./profile.props";
 import { Button, Input, PageTitle } from "../../components";
 import styles from "./profile.module.scss";
-import { Card, FileButton, Tabs, Textarea, TextInput, Text, Group, Image } from "@mantine/core";
+import { Card, FileButton, Tabs, Textarea, TextInput, Text, Group, Image, PasswordInput } from "@mantine/core";
 
 export const Profile: FC<IProfileProps> = () => {
-  const [storeName, setStoreName] = useState('Store Name');
-  const [storeDescription, setStoreDescription] = useState('Store description, policies, and contact info...');
-  const [storeImage, setStoreImage] = useState('https://poscenter.kz/upload/iblock/01f/14onz36nubr0ora7rsrj9hfzhpr4tjpl.jpg');
+  const [storeName, setStoreName] = useState("Store Name");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [address, setAddress] = useState("");
 
+  const [storeImage, setStoreImage] = useState(
+    "https://poscenter.kz/upload/iblock/01f/14onz36nubr0ora7rsrj9hfzhpr4tjpl.jpg"
+  );
 
   return (
     <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -24,8 +29,13 @@ export const Profile: FC<IProfileProps> = () => {
           <Group align="flex-start" noWrap>
             <Image src={storeImage} width={120} height={120} radius="md" alt="Store Logo" />
             <div style={{ flex: 1 }}>
-              <TextInput label="Store Name" value={storeName} onChange={(e) => setStoreName(e.target.value)} required
-                         mb="sm" />
+              <TextInput
+                label="Store Name"
+                value={storeName}
+                onChange={(e) => setStoreName(e.target.value)}
+                required
+                mb="sm"
+              />
               <FileButton onChange={(file) => file && setStoreImage(URL.createObjectURL(file))} accept="image/*">
                 {(props) => <Button {...props}>Upload Store Logo</Button>}
               </FileButton>
@@ -41,8 +51,43 @@ export const Profile: FC<IProfileProps> = () => {
           </Tabs.List>
 
           <Tabs.Panel value="details" pt="md">
-            <Textarea label="Store Description" value={storeDescription}
-                      onChange={(e) => setStoreDescription(e.target.value)} required mb="sm" />
+            <Card mb="md" shadow="sm" radius="md" withBorder>
+              <TextInput
+                label="ZIP Code"
+                placeholder="Enter your ZIP code"
+                value={zipCode}
+                onChange={(e) => setZipCode(e.target.value)}
+                required
+                mt="sm"
+              />
+
+              <Textarea
+                label="Legal Address"
+                placeholder="Enter your legal address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                required
+                mt="sm"
+              />
+              <TextInput
+                label="Email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                required
+                mt="sm"
+              />
+
+              <PasswordInput
+                label="Password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                mt="sm"
+              />
+            </Card>
             <Button>Save Changes</Button>
           </Tabs.Panel>
 
@@ -56,4 +101,5 @@ export const Profile: FC<IProfileProps> = () => {
         </Tabs>
       </>
     </motion.section>
-)};
+  );
+};

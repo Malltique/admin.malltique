@@ -10,8 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Layout: FC<ILayoutProps> = ({ children, ...props }) => {
   const navigate = useNavigate();
-  const { openLogin, setOpenLogin, token } = useContext<IMainContext>(MainContext);
-
+  const token = localStorage.getItem("token");
   return (
     <div {...props}>
       <Sidebar />
@@ -19,10 +18,10 @@ export const Layout: FC<ILayoutProps> = ({ children, ...props }) => {
         <Languages />
         <div className={styles.login_icon}>
           <Button
-            onClick={() => navigate('/auth')}
+            onClick={() => navigate(token ? '/profile' : '/auth')}
             variant="secondary"
             >
-            <i className="icon-login" />
+            {token ? <i className="icon-user" /> :<i className="icon-login" />}
           </Button>
         </div>
         <div className={styles.container}>{children}</div>
