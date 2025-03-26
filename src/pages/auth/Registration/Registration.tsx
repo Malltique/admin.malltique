@@ -3,6 +3,7 @@ import { Button as ButtonWithIcon, Card, Divider, Group, PasswordInput, Textarea
 import { Button } from "../../../components";
 import { IconBrandFacebook, IconBrandGoogle } from "@tabler/icons-react";
 import { useRegister } from "./query";
+import { useLogin } from "../Login/query";
 
 export const Registration = () => {
   const [storeName, setStoreName] = useState("");
@@ -12,15 +13,11 @@ export const Registration = () => {
 
   const userData = {name: storeName, password, email, roles: [0] }
 
-  const { data, error, isLoading, refetch } = useRegister(userData);
+  const registration = useRegister();
 
-  const handleRegister = () => {
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-
-    refetch(); // Запускаем запрос вручную
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault();
+    registration.mutate(userData);
   };
 
   return (

@@ -7,6 +7,7 @@ import { Sidebar } from "./sidebar/Sidebar";
 import { Button, Languages } from "../components";
 import { IMainContext, MainContext, MainContextProvider } from "../context";
 import { useNavigate } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export const Layout: FC<ILayoutProps> = ({ children, ...props }) => {
   const navigate = useNavigate();
@@ -17,11 +18,8 @@ export const Layout: FC<ILayoutProps> = ({ children, ...props }) => {
       <main className={styles.main}>
         <Languages />
         <div className={styles.login_icon}>
-          <Button
-            onClick={() => navigate(token ? '/profile' : '/auth')}
-            variant="secondary"
-            >
-            {token ? <i className="icon-user" /> :<i className="icon-login" />}
+          <Button onClick={() => navigate(token ? "/profile" : "/auth")} variant="secondary">
+            {token ? <i className="icon-user" /> : <i className="icon-login" />}
           </Button>
         </div>
         <div className={styles.container}>{children}</div>
@@ -34,9 +32,10 @@ export const withLayout =
   <T extends Record<string, unknown>>(Component: FunctionComponent<T>) =>
   (props: T) =>
     (
-      <MainContextProvider token={null} openLogin={false}>
-        <Layout>
-          <Component {...props} />
-        </Layout>
-      </MainContextProvider>
+
+        <MainContextProvider token={null} openLogin={false}>
+          <Layout>
+            <Component {...props} />
+          </Layout>
+        </MainContextProvider>
     );

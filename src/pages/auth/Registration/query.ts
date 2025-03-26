@@ -1,4 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const registerUser = async (userData: {
   email: string;
@@ -21,11 +22,13 @@ const registerUser = async (userData: {
   return response.json();
 };
 
-export const useRegister = (userData: { email: string; name: string; password: string; roles: number[] } | null) => {
-  return useQuery({
-    queryKey: ["register", userData],
-    queryFn: () => (userData ? registerUser(userData) : Promise.resolve(null)),
-    enabled: false, // Запрос запускается вручную
-    retry: false, // Без автоматического повтора
+export const useRegister = () => {
+  const navigate = useNavigate();
+  return useMutation({
+    mutationFn: registerUser,
+    onSuccess: (data) => {
+      localStorage.setItem("token", data.token); // Сохраняем токен
+      navigate("/dashboard"); // Делаем редирект после успешной авторизации
+    },
   });
 };

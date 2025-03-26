@@ -7,11 +7,11 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const mutation = useLogin();
+  const login = useLogin();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    mutation.mutate({ email, password });
+    login.mutate({ email, password });
   };
 
   return (

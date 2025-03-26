@@ -20,7 +20,7 @@ const productSales = [
   { product: "Tablets", sales: 200 },
 ];
 
-const COLORS = ["#8884d8", "#82ca9d", "#ffc658"];
+const COLORS = ["#8884d8", "hsl(353, 100%, 65%)", "hsl(43, 100%, 68%)"];
 
 export const Dashboard: FC<IDashboardProps> = () => {
   return (
@@ -32,7 +32,7 @@ export const Dashboard: FC<IDashboardProps> = () => {
       </div>
       <Container size="lg">
         <Grid grow gutter="lg">
-          {/* Линейный график */}
+          {/* Линейныйрафик */}
           <Grid.Col span={4}>
               <Title order={4} mb="sm">Monthly Sales</Title>
               <LineChart width={400} height={250} data={salesData}>

@@ -1,5 +1,8 @@
 @use "../../styles/abstracts" as *;
 
+.wrapper {
+  margin-bottom: 2rem;
+}
 .product_grid {
   display: grid;
   gap: 1rem;

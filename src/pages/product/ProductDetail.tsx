@@ -1,22 +1,50 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Card, FileButton, Group, Image, MultiSelect, PasswordInput, Textarea, TextInput } from "@mantine/core";
-import { Button, PageTitle } from "../../components";
-import styles from "../profile/profile.module.scss";
-import { useCreateProduct } from "./query";
+import {
+  Card,
+  FileButton,
+  FileInput,
+  Group,
+  Image, Modal,
+  MultiSelect,
+  PasswordInput,
+  Select,
+  Textarea,
+  TextInput
+} from "@mantine/core";
+import { Button, DeleteModal, PageTitle } from "../../components";
+import styles from "./product.module.scss";
+import { useCreateProduct, useDeleteProduct } from "./query";
+import { useParams } from "react-router-dom";
 
 export const ProductDetail = () => {
+  const [openDeleteModal, setOpenDeleteModal] = useState(false)
   const [name, setName] = useState("Product Name");
   const [description, setDescription] = useState("Product Description");
-  const [price, setPrice] = useState('100');
-  const [quantity, setQuantity] = useState('20');
+  const [price, setPrice] = useState("100");
+  const [quantity, setQuantity] = useState("20");
   const [categories, setCategories] = useState<string[]>([]);
   const [categoriesData, setCategoriesData] = useState([
-    { value: '0', label: 'New' },
-    { value: '1', label: 'Popular' },
+    { value: "0", label: "New" },
+    { value: "1", label: "Popular" },
   ]);
 
+
+
+  const {id} = useParams()
+  const isCreate = id === "0"
+
   const mutation = useCreateProduct();
+  const { mutate: deleteProducts } = useDeleteProduct();
+
+  const handleDelete = () => {
+    // @ts-ignore
+    deleteProducts([+id], {
+      onSuccess: () => {
+        setOpenDeleteModal(false)
+      }
+    });
+  };
 
   const handleSubmit = () => {
     // @ts-ignore
@@ -28,31 +56,25 @@ export const ProductDetail = () => {
   );
 
   return (
-    <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <motion.section className={styles.wrapper} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <div className={styles.product_header}>
         <div className={styles.product_name}>
-          <PageTitle>Profile</PageTitle>
+          <PageTitle>{isCreate ? 'Create Product' : 'Edit Product'}</PageTitle>
         </div>
       </div>
       <Card shadow="sm" radius="md" withBorder>
         <Group align="flex-start" noWrap>
-          <Image src={productImage} width={120} height={120} radius="md" alt="Store Logo" />
+          <Image src={productImage} width={120} height={120} radius="md" alt="Logo" />
           <div style={{ flex: 1 }}>
-            <TextInput
-              label="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              mb="sm"
-            />
+            <TextInput label="Name" value={name} onChange={(e) => setName(e.target.value)} required mb="sm" />
             <FileButton onChange={(file) => file && setProductImage(URL.createObjectURL(file))} accept="image/*">
-              {(props) => <Button {...props}>Upload Store Logo</Button>}
+              {(props) => <Button {...props}>Upload Images</Button>}
             </FileButton>
           </div>
         </Group>
       </Card>
-      <Card mb="md" shadow="sm" radius="md" withBorder>
-        <TextInput
+      <Card mt="md" mb="md" shadow="sm" radius="md" withBorder>
+        <Textarea
           label="Description"
           placeholder="Enter description"
           value={description}
@@ -61,7 +83,7 @@ export const ProductDetail = () => {
           mt="sm"
         />
 
-        <Textarea
+        <TextInput
           label="Price"
           placeholder="Enter price"
           value={price}
@@ -70,7 +92,7 @@ export const ProductDetail = () => {
           mt="sm"
         />
 
-        <Textarea
+        <TextInput
           label="Quantity"
           placeholder="Enter quantity"
           value={quantity}
@@ -80,7 +102,7 @@ export const ProductDetail = () => {
         />
 
         <MultiSelect
-          label="Creatable MultiSelect"
+          label="Categories"
           data={categoriesData}
           placeholder="Select items"
           searchable
@@ -95,8 +117,11 @@ export const ProductDetail = () => {
           }}
         />
       </Card>
-
-      <Button onClick={handleSubmit}>Save Changes</Button>
+      <Group align="flex-start" noWrap>
+        <Button onClick={handleSubmit}>{isCreate ? "Add Product" : "Save Changes"}</Button>
+        {!isCreate && <Button variant="outline" onClick={() => setOpenDeleteModal(true)}>Delete</Button>}
+      </Group>
+      <DeleteModal onConfirm={handleDelete} opened={openDeleteModal} onClose={() => setOpenDeleteModal(false)}/>
     </motion.section>
   );
 };

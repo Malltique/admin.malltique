@@ -5,21 +5,11 @@ import { IProductProps } from "./product.props";
 import { Button, Input, PageTitle } from "../../components";
 
 import styles from "./product.module.scss";
-import {
-  Card,
-  Image,
-  Text,
-  Badge,
-  Group,
-  Rating,
-  ActionIcon,
-  Modal,
-  TextInput,
-  Select,
-  MultiSelect, FileInput, Textarea
-} from "@mantine/core";
-import { IconEdit, IconTrash } from '@tabler/icons-react';
+
+import { IconPlus } from "@tabler/icons-react";
 import { ProductCard } from "./ProductCard";
+import { useNavigate } from "react-router-dom";
+import { useDeleteProduct, useProduct } from "./query";
 
 const categories = ['Category 1', 'Category 2', 'Category 3'];
 const tags = ['New', 'Popular', 'Trending', 'Discount'];
@@ -46,13 +36,15 @@ const products = [
 ];
 
 export const Product: FC<IProductProps> = () => {
-  const [editProduct, setEditProduct] = useState<any>(null);
-  const [modalOpened, setModalOpened] = useState(false);
+  const navigate = useNavigate()
+  const {data} = useProduct();
+  const { mutate: deleteProducts } = useDeleteProduct();
 
-  const openEditModal = (product: any) => {
-    setEditProduct(product);
-    setModalOpened(true);
+  const handleDelete = (id: number) => {
+    // @ts-ignore
+    deleteProducts([id]);
   };
+
 
   return (
     <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -67,28 +59,19 @@ export const Product: FC<IProductProps> = () => {
             </div>
             <Input type="text" placeholder="Search" />
           </div>
-          <Button>
-            <i className="icon-equalizer" />
+          <Button onClick={() => navigate("0")}>
+            <IconPlus size={18}/>
           </Button>
         </div>
       </div>
       <div >
-        {products.map((product) => (
-          <ProductCard product={product} openEditModal={openEditModal}/>
+        {data?.map((product: any) => (
+          <ProductCard product={product}
+                       key={product.id}
+                       onDelete={handleDelete}
+          />
         ))}
       </div>
-      <Modal opened={modalOpened} onClose={() => setModalOpened(false)} title="Edit Product">
-        {editProduct && (
-          <form>
-            <TextInput label="Title" defaultValue={editProduct.title} required mb="sm" />
-            <Select label="Category" data={categories} defaultValue={editProduct.category} required mb="sm" />
-            <MultiSelect label="Tags" data={tags} defaultValue={editProduct.tags} mb="sm" />
-            <FileInput label="Upload Images (up to 6)" multiple accept="image/*" mb="sm" />
-            <Textarea label="Description" defaultValue={editProduct.description} required mb="sm" />
-            <Button type="submit">Save</Button>
-          </form>
-        )}
-      </Modal>
     </motion.section>
   );
 };
