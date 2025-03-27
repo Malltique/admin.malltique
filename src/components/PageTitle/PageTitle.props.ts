@@ -1,5 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
 
 export interface IPageTitleProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  children: ReactNode;
+  title: string;
+  withSearch?: boolean;
+  withFilters?: boolean;
 }

@@ -19,7 +19,7 @@ export const Layout: FC<ILayoutProps> = ({ children, ...props }) => {
         <Languages />
         <div className={styles.login_icon}>
           <Button onClick={() => navigate(token ? "/profile" : "/auth")} variant="secondary">
-            {token ? <i className="icon-user" /> : <i className="icon-login" />}
+            {!token ? <i className="icon-user" /> : <i className="icon-login" />}
           </Button>
         </div>
         <div className={styles.container}>{children}</div>

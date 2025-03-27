@@ -1,4 +1,4 @@
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, Avatar } from "@mantine/core";
 import cn from "classnames";
 import React, { FC, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
@@ -6,6 +6,7 @@ import { Link, NavLink } from "react-router-dom";
 import styles from "./sidebar.module.scss";
 import { ISidebarProps } from "./sidebar.props";
 import Logo from "../../assets/logo.png";
+import avatar from './avatar.jpg';
 
 export const Sidebar: FC<ISidebarProps> = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -21,8 +22,8 @@ export const Sidebar: FC<ISidebarProps> = () => {
         className={cn(styles.aside, {
           [styles.aside_mobile_open]: openMenu,
         })}>
-        <Link to="/admin.malltique" className={styles.logo}>
-          <img src={Logo} alt="logo" />
+        <Link to={token ? '/settings/2' : '/admin.malltique'} className={styles.logo}>
+          <Avatar src={token ? avatar : Logo} alt="ava" />
         </Link>
 
         <nav className={styles.nav}>
@@ -30,7 +31,7 @@ export const Sidebar: FC<ISidebarProps> = () => {
             <ul className={styles.nav_list}>
               {!token && (
                 <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
-                  <NavLink to="/admin.malltique" className={styles.nav_link} style={active}>
+                  <NavLink to='/admin.malltique' className={styles.nav_link} style={active}>
                     <i className="icon-home"></i>
                   </NavLink>
                 </li>
@@ -53,8 +54,8 @@ export const Sidebar: FC<ISidebarProps> = () => {
                     </NavLink>
                   </li>
                   <li className={styles.nav_item} onClick={() => setOpenMenu((prev) => !prev)}>
-                    <NavLink to="/profile" className={styles.nav_link} style={active}>
-                      <i className="icon-user"></i>
+                    <NavLink to="/settings/2" className={styles.nav_link} style={active}>
+                      <i className="icon-settings"></i>
                     </NavLink>
                   </li>
                 </>

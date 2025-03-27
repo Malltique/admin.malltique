@@ -25,11 +25,7 @@ const COLORS = ["#8884d8", "hsl(353, 100%, 65%)", "hsl(43, 100%, 68%)"];
 export const Dashboard: FC<IDashboardProps> = () => {
   return (
     <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <div className={styles.product_header}>
-        <div className={styles.product_name}>
-          <PageTitle>Dashboard</PageTitle>
-        </div>
-      </div>
+      <PageTitle title="Dashboard" />
       <Container size="lg">
         <Grid grow gutter="lg">
           {/* Линейныйрафик */}

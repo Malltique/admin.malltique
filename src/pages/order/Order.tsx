@@ -1,54 +1,95 @@
-import { Image, Modal, useMantineTheme } from "@mantine/core";
+import { Badge, Tabs, Table, Group, Card } from "@mantine/core";
 import { motion } from "framer-motion";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 
-import {IOrderProps} from "./order.props";
-import { Button, Input, PageTitle } from "../../components";
-import { PRODUCT_MOCK } from "../../data";
-import { IProduct } from "../../interface";
+import { IOrderProps } from "./order.props";
+import { PageTitle } from "../../components";
 
-import styles from "./order.module.scss";
+import { IconCheck, IconClipboardList, IconClock, IconTruck } from "@tabler/icons-react";
+
+const ordersData = {
+  new: [
+    { article: "A001", name: "Product 1", quantity: 5, message: "Urgent delivery" },
+    { article: "A002", name: "Product 2", quantity: 2, message: "Gift wrap please" },
+  ],
+  inProgress: [{ article: "B001", name: "Product 3", quantity: 3, message: "Handle with care" }],
+  inDelivery: [{ article: "C001", name: "Product 4", quantity: 10, message: "Deliver before 5 PM" }],
+  completed: [{ article: "D001", name: "Product 5", quantity: 7, message: "No rush" }],
+};
 
 export const Order: FC<IOrderProps> = () => {
-  const [openModal, setOpenModal] = useState(false);
 
-  const theme = useMantineTheme();
-
-  const handleCloseModalClick = () => setOpenModal(false);
+  const renderTable = (data: any) => (
+    <Table>
+      <thead>
+        <tr>
+          <th>Article</th>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Message from Customer</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((item: any, index: any) => (
+          <tr key={index}>
+            <td>{item.article}</td>
+            <td>{item.name}</td>
+            <td>{item.quantity}</td>
+            <td>{item.message}</td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
+  );
 
   return (
     <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <div className={styles.product_header}>
-        <div className={styles.product_name}>
-          <PageTitle>Orders</PageTitle>
-        </div>
-        <div className={styles.filter_wrapper}>
-          <div className={styles.input_wrapper}>
-            <div className={styles.search_icon_wrapper}>
-              <i className="icon-magnifier" />
-            </div>
-            <Input type="text" placeholder="Search" />
-          </div>
-          <Button>
-            <i className="icon-equalizer" />
-          </Button>
-        </div>
-      </div>
-      <div className={styles.product_grid}>
-        {/*{PRODUCT_MOCK.map((product) => (*/}
-        {/*  <div className={styles.product_card} key={product.id}>*/}
-        {/*    <div className={styles.product_thumbnail}>*/}
-        {/*      <Image src={product?.images?.main} alt="" className={styles.product_img} />*/}
-        {/*      <div className={styles.product_mask}></div>*/}
-        {/*    </div>*/}
-        {/*    <span className={styles.product_category}>{product.category}</span>*/}
-        {/*    <h3 className={styles.product_title}>{product.title}</h3>*/}
-        {/*    <a onClick={() => handleOpenModalClick(product)} className={styles.product_button}>*/}
-        {/*      <i className="icon-list" />*/}
-        {/*    </a>*/}
-        {/*  </div>*/}
-        {/*))}*/}
-      </div>
+      <PageTitle title="Orders" withFilters withSearch/>
+        <Tabs defaultValue="new" mt="md">
+          <Tabs.List mb="md">
+            <Tabs.Tab value="new">
+              <Group>
+                <IconClipboardList size={16} /> New <Badge color="green">{ordersData.new.length}</Badge>
+              </Group>
+            </Tabs.Tab>
+            <Tabs.Tab value="inProgress">
+              <Group>
+                <IconClock size={16} /> In Progress <Badge color="pink">{ordersData.inProgress.length}</Badge>
+              </Group>
+            </Tabs.Tab>
+            <Tabs.Tab value="inDelivery">
+              <Group>
+                <IconTruck size={16} /> In Delivery <Badge color="pink"> {ordersData.inDelivery.length}</Badge>
+              </Group>
+            </Tabs.Tab>
+            <Tabs.Tab value="completed">
+              <Group>
+                <IconCheck size={16} /> Completed <Badge color="pink">{ordersData.completed.length}</Badge>
+              </Group>
+            </Tabs.Tab>
+          </Tabs.List>
+
+          <Tabs.Panel value="new">
+            <Card mb="md" shadow="sm" radius="md" withBorder>
+              {renderTable(ordersData.new)}
+            </Card>
+          </Tabs.Panel>
+          <Tabs.Panel value="inProgress">
+            <Card mb="md" shadow="sm" radius="md" withBorder>
+              {renderTable(ordersData.inProgress)}
+            </Card>
+          </Tabs.Panel>
+          <Tabs.Panel value="inDelivery">
+            <Card mb="md" shadow="sm" radius="md" withBorder>
+              {renderTable(ordersData.inDelivery)}
+            </Card>
+          </Tabs.Panel>
+          <Tabs.Panel value="completed">
+            <Card mb="md" shadow="sm" radius="md" withBorder>
+              {renderTable(ordersData.completed)}
+            </Card>
+          </Tabs.Panel>
+        </Tabs>
     </motion.section>
   );
 };

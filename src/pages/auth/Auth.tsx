@@ -13,9 +13,7 @@ export const Auth: FC<IAuthProps> = () => {
 
   return (
     <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <div className={styles.product_name}>
-        <PageTitle>{activeTab}</PageTitle>
-      </div>
+      <PageTitle title={activeTab}/>
 
       <Tabs value={activeTab} onTabChange={setActiveTab}>
         <Tabs.List grow>

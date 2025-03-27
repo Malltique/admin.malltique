@@ -2,14 +2,14 @@ import { motion } from "framer-motion";
 import React, { FC, useState } from "react";
 
 import { IProductProps } from "./product.props";
-import { Button, Input, PageTitle } from "../../components";
-
-import styles from "./product.module.scss";
-
-import { IconPlus } from "@tabler/icons-react";
+import { PageTitle, Button } from "../../components";
+import { Stack, Text, Button as MantineButton } from "@mantine/core";
+import { ReactComponent as Stub } from '../../assets/stub.svg';
+import { IconBox, IconPlus } from "@tabler/icons-react";
 import { ProductCard } from "./ProductCard";
 import { useNavigate } from "react-router-dom";
 import { useDeleteProduct, useProduct } from "./query";
+import styles from "./product.module.scss";
 
 const categories = ['Category 1', 'Category 2', 'Category 3'];
 const tags = ['New', 'Popular', 'Trending', 'Discount'];
@@ -45,32 +45,42 @@ export const Product: FC<IProductProps> = () => {
     deleteProducts([id]);
   };
 
+  const showStub = !data?.length
+
 
   return (
     <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <div className={styles.product_header}>
-        <div className={styles.product_name}>
-          <PageTitle>Products</PageTitle>
-        </div>
-        <div className={styles.filter_wrapper}>
-          <div className={styles.input_wrapper}>
-            <div className={styles.search_icon_wrapper}>
-              <i className="icon-magnifier" />
-            </div>
-            <Input type="text" placeholder="Search" />
-          </div>
-          <Button onClick={() => navigate("0")}>
-            <IconPlus size={18}/>
-          </Button>
-        </div>
-      </div>
-      <div >
+      <PageTitle title="Products" withFilters withSearch/>
+      {!showStub && (
+        <MantineButton mb="md"
+                       onClick={() => navigate("0")}
+                       fullWidth
+                       variant="gradient"
+                       gradient={{ from: 'hsla(43,100%,68%,0.18)' , to:'hsla(353,100%,65%,0.66)', deg: 35 }}>
+          Add Product
+        </MantineButton>
+      )}
+      <div>
         {data?.map((product: any) => (
           <ProductCard product={product}
                        key={product.id}
                        onDelete={handleDelete}
           />
         ))}
+        {showStub && (
+          <div className={styles.stub_wrapper}>
+            <Stack align="center" spacing="md">
+              <Stub className={styles.stub} />
+              <Text size="xl" weight={500}>
+                No products available yet
+              </Text>
+              <Text color="dimmed">Be the first to add one!</Text>
+              <Button onClick={() => navigate("0")}>
+                Add Product
+              </Button>
+            </Stack>
+          </div>
+        )}
       </div>
     </motion.section>
   );

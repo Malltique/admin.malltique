@@ -3,17 +3,13 @@ import { motion } from "framer-motion";
 import {
   Card,
   FileButton,
-  FileInput,
   Group,
-  Image, Modal,
+  Image,
   MultiSelect,
-  PasswordInput,
-  Select,
   Textarea,
   TextInput
 } from "@mantine/core";
 import { Button, DeleteModal, PageTitle } from "../../components";
-import styles from "./product.module.scss";
 import { useCreateProduct, useDeleteProduct } from "./query";
 import { useParams } from "react-router-dom";
 
@@ -56,12 +52,8 @@ export const ProductDetail = () => {
   );
 
   return (
-    <motion.section className={styles.wrapper} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <div className={styles.product_header}>
-        <div className={styles.product_name}>
-          <PageTitle>{isCreate ? 'Create Product' : 'Edit Product'}</PageTitle>
-        </div>
-      </div>
+    <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <PageTitle title={isCreate ? 'Create' : 'Edit'} />
       <Card shadow="sm" radius="md" withBorder>
         <Group align="flex-start" noWrap>
           <Image src={productImage} width={120} height={120} radius="md" alt="Logo" />
