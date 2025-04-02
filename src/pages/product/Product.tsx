@@ -5,7 +5,6 @@ import { IProductProps } from "./product.props";
 import { PageTitle, Button } from "../../components";
 import { Stack, Text, Button as MantineButton } from "@mantine/core";
 import { ReactComponent as Stub } from '../../assets/stub.svg';
-import { IconBox, IconPlus } from "@tabler/icons-react";
 import { ProductCard } from "./ProductCard";
 import { useNavigate } from "react-router-dom";
 import { useDeleteProduct, useProduct } from "./query";
@@ -74,7 +73,6 @@ export const Product: FC<IProductProps> = () => {
               <Text size="xl" weight={500}>
                 No products available yet
               </Text>
-              <Text color="dimmed">Be the first to add one!</Text>
               <Button onClick={() => navigate("0")}>
                 Add Product
               </Button>
