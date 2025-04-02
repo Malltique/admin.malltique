@@ -12,13 +12,21 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 export const Layout: FC<ILayoutProps> = ({ children, ...props }) => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const auth = () => {
+      if (!token) {
+          navigate("/auth");
+      } else {
+          localStorage.removeItem("token");
+          navigate("/admin.malltique");
+      }
+  }
   return (
     <div {...props}>
       <Sidebar />
       <main className={styles.main}>
         <Languages />
         <div className={styles.login_icon}>
-          <Button onClick={() => navigate(token ? "/profile" : "/auth")} variant="secondary">
+          <Button onClick={auth} variant="secondary">
             {!token ? <i className="icon-user" /> : <i className="icon-login" />}
           </Button>
         </div>
