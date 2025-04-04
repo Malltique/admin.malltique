@@ -13,13 +13,14 @@ export const Layout: FC<ILayoutProps> = ({ children, ...props }) => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const auth = () => {
-      if (!token) {
-          navigate("/auth");
-      } else {
-          localStorage.removeItem("token");
-          navigate("/admin.malltique");
-      }
+    if (!token) {
+      navigate("/auth");
+    } else {
+      localStorage.removeItem("token");
+      navigate("/admin.malltique");
+    }
   }
+
   return (
     <div {...props}>
       <Sidebar />
