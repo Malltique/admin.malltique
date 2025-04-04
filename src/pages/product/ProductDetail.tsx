@@ -17,6 +17,8 @@ export const ProductDetail = () => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
   const [name, setName] = useState("Product Name");
   const [description, setDescription] = useState("Product Description");
+  const [model, setModel] = useState("Product Model");
+  const [article, setArticle] = useState("Product Article");
   const [price, setPrice] = useState("100");
   const [quantity, setQuantity] = useState("20");
   const [categories, setCategories] = useState<string[]>([]);
@@ -44,7 +46,7 @@ export const ProductDetail = () => {
 
   const handleSubmit = () => {
     // @ts-ignore
-    mutation.mutate([{ seller: 82, name, description, categories: [1, 3, 5], quantity: 50, price: 100 }]);
+    mutation.mutate([{ seller: 82, name, description, categories: [1, 3, 5], quantity: 50, price: 100,  model, article, pictureLinks: []}]);
   };
 
   const [productImage, setProductImage] = useState(
@@ -89,6 +91,24 @@ export const ProductDetail = () => {
           placeholder="Enter quantity"
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
+          required
+          mt="sm"
+        />
+
+        <TextInput
+          label="Model"
+          placeholder="Enter model"
+          value={model}
+          onChange={(e) => setModel(e.target.value)}
+          required
+          mt="sm"
+        />
+
+        <TextInput
+          label="Article"
+          placeholder="Enter article"
+          value={article}
+          onChange={(e) => setArticle(e.target.value)}
           required
           mt="sm"
         />
